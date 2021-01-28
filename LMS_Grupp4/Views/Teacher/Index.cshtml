@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LMS_Grupp4.Models.LMS_Models.Course>
+@using LMS_Grupp4.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="jumbotron">
+    <h1>Index</h1>
+    <h2>You are logged in as Teacher: @User.Identity.GetUserRealName()</h2>
+    <small>ID: @ViewBag.UserID</small>
+</div>
+
+<td>
+    <a href="@Url.Action("Index", "CourseApplication")">Course Application</a>|
+    <a href="@Url.Action("Index", "Assignment")">My Assignments</a>|
+    <a href="@Url.Action("Index", "Course")">My Courses</a>|
+    <a href="@Url.Action("Students", "Teacher")">My Students</a>
+</td>
+
+<h2>My Courses</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Course
+        </th>
+        <th>
+            Description
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(course => item.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(course => item.Description)
+            </td>
+        </tr>
+    }
+
+</table>
