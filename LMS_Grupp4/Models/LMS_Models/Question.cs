@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace LMS_Grupp4.Models.LMS_Models
 {
 	[Bind(Exclude = "ID")]
-    public class Quiz
+    public class Question
 	{
 
 		[Key]

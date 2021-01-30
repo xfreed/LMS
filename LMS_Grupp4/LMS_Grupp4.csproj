@@ -211,6 +211,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101301217458_QuizQuestion.cs" />
+    <Compile Include="Migrations\202101301217458_QuizQuestion.Designer.cs">
+      <DependentUpon>202101301217458_QuizQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -220,7 +224,9 @@
     <Compile Include="Models\LMS_Models\CourseApplication.cs" />
     <Compile Include="Models\LMS_Models\LMSFile.cs" />
     <Compile Include="Models\LMS_Models\ProgramClass.cs" />
-    <Compile Include="Models\LMS_Models\Quiz.cs" />
+    <Compile Include="Models\LMS_Models\Question.cs" />
+    <Compile Include="Models\LMS_Models\QuizInformation.cs" />
+    <Compile Include="Models\LMS_Models\QuizQuestion.cs" />
     <Compile Include="Models\LMS_ViewModels\Admin_ManageUserViewModel.cs" />
     <Compile Include="Models\LMS_ViewModels\Assignment_CreateViewModel.cs" />
     <Compile Include="Models\LMS_ViewModels\Course_ApplicationViewModel.cs" />
@@ -366,6 +372,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101301217458_QuizQuestion.resx">
+      <DependentUpon>202101301217458_QuizQuestion.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

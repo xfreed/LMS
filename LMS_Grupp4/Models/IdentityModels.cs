@@ -42,7 +42,9 @@ namespace LMS_Grupp4.Models
         public DbSet<LMSFile> Files { get; set; }
         public DbSet<ProgramClass> ProgramClasses { get; set; }
         public DbSet<CourseApplication> CourseApplications { get; set; }
-
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<QuizInformation> QuizInformations { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
