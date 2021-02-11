@@ -215,6 +215,14 @@
     <Compile Include="Migrations\202101301217458_QuizQuestion.Designer.cs">
       <DependentUpon>202101301217458_QuizQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102111507260_change_quiz.cs" />
+    <Compile Include="Migrations\202102111507260_change_quiz.Designer.cs">
+      <DependentUpon>202102111507260_change_quiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102111530196_change_quizQuestion.cs" />
+    <Compile Include="Migrations\202102111530196_change_quizQuestion.Designer.cs">
+      <DependentUpon>202102111530196_change_quizQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -255,6 +263,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\quiz.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -361,6 +370,9 @@
     <Content Include="Views\CourseApplication\Details.cshtml" />
     <Content Include="Views\File\Upload.cshtml" />
     <Content Include="Views\Quiz\Index.cshtml" />
+    <Content Include="Views\Quiz\Create.cshtml" />
+    <Content Include="Views\Quiz\Play.cshtml" />
+    <Content Include="Views\Quiz\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Search\" />
@@ -376,6 +388,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101301217458_QuizQuestion.resx">
       <DependentUpon>202101301217458_QuizQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102111507260_change_quiz.resx">
+      <DependentUpon>202102111507260_change_quiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102111530196_change_quizQuestion.resx">
+      <DependentUpon>202102111530196_change_quizQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

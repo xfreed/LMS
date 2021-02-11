@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
@@ -263,5 +264,29 @@ namespace LMS_Grupp4.Repositories
             db.SaveChanges();
         }
         #endregion
+
+
+        public void AddQuestions(List<Question> questions)
+        {
+            db.Questions.AddRange(questions);
+            db.SaveChanges();
+        }
+
+        public void AddQuizInformation(QuizInformation quizInformation)
+        {
+            db.QuizInformations.Add(quizInformation);
+            db.SaveChanges();
+        }
+
+        public void AddQuizQuestions(List<QuizQuestion> quizInformation)
+        {
+            db.QuizQuestions.AddRange(quizInformation);
+            db.SaveChanges();
+        }
+
+        public List<QuizInformation> GetAllQuizInformation()
+        {
+            return db.QuizInformations.ToList();
+        }
     }
 }
