@@ -223,6 +223,10 @@
     <Compile Include="Migrations\202102111530196_change_quizQuestion.Designer.cs">
       <DependentUpon>202102111530196_change_quizQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102121615524_QuizScore.cs" />
+    <Compile Include="Migrations\202102121615524_QuizScore.Designer.cs">
+      <DependentUpon>202102121615524_QuizScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -235,6 +239,7 @@
     <Compile Include="Models\LMS_Models\Question.cs" />
     <Compile Include="Models\LMS_Models\QuizInformation.cs" />
     <Compile Include="Models\LMS_Models\QuizQuestion.cs" />
+    <Compile Include="Models\LMS_Models\QuizScore.cs" />
     <Compile Include="Models\LMS_ViewModels\Admin_ManageUserViewModel.cs" />
     <Compile Include="Models\LMS_ViewModels\Assignment_CreateViewModel.cs" />
     <Compile Include="Models\LMS_ViewModels\Course_ApplicationViewModel.cs" />
@@ -394,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102111530196_change_quizQuestion.resx">
       <DependentUpon>202102111530196_change_quizQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102121615524_QuizScore.resx">
+      <DependentUpon>202102121615524_QuizScore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

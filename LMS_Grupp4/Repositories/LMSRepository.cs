@@ -288,5 +288,36 @@ namespace LMS_Grupp4.Repositories
         {
             return db.QuizInformations.ToList();
         }
+
+        public void DeleteQuiz(int id)
+        {
+            var quizQuestions = db.QuizQuestions.Where(x => x.QuizInformation.ID == id);
+            db.QuizQuestions.RemoveRange(quizQuestions);
+            db.Questions.RemoveRange(quizQuestions.Select(x => x.Question));
+            db.QuizInformations.Remove(db.QuizInformations.First(x => x.ID == id));
+            db.SaveChanges();
+        }
+
+        public IQueryable<Question> GetQuestionById(int id)
+        {
+            return db.QuizQuestions.Where(x => x.QuizInformation.ID == id).Select(x => x.Question);
+        }
+
+        public void AddNewQuizScore(QuizScore score)
+        {
+            db.QuizScores.Add(score);
+            db.SaveChanges();
+        }
+
+        public QuizInformation GetQuizInformationById(int quizId)
+        {
+            return db.QuizInformations.First(x => x.ID == quizId);
+        }
+
+
+        public bool GetPlayedQuiz(string userId, int quizId)
+        {
+            return db.QuizScores.Count(x => x.QuizUser.Id == userId && x.QuizInformation.ID == quizId)>0;
+        }
     }
 }

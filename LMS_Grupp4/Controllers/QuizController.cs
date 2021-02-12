@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LMS_Grupp4.Models;
 using LMS_Grupp4.Models.LMS_Models;
 using LMS_Grupp4.Repositories;
+using Microsoft.AspNet.Identity;
 
 namespace LMS_Grupp4.Controllers
 {
@@ -24,22 +26,35 @@ namespace LMS_Grupp4.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Play()
         {
+            SelectList quiz = new SelectList(LMSRepo.GetAllQuizInformation(), "Id", "QuizName");
+            ViewBag.QuizInformation = quiz;
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult Play(int id)
+        {
+            var questions = LMSRepo.GetQuestionById(id).ToList();
+            UserManager<ApplicationUser> userManager = LMSRepo.GetUserManager();
+            bool played = LMSRepo.GetPlayedQuiz(userManager.FindById(User.Identity.GetUserId()).Id, id);
+            return Json(new {response = questions, played });
         }
 
         [HttpGet]
         public ActionResult Delete()
         {
-            SelectList quizs = new SelectList(LMSRepo.GetAllQuizInformation(), "Id", "QuizName");
-            ViewBag.QuizInformation = quizs;
+            SelectList quiz = new SelectList(LMSRepo.GetAllQuizInformation(), "Id", "QuizName");
+            ViewBag.QuizInformation = quiz;
             return View();
         }
 
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            LMSRepo.DeleteQuiz(id);
             return View();
         }
 
@@ -71,6 +86,22 @@ namespace LMS_Grupp4.Controllers
 
             LMSRepo.AddQuizQuestions(quizQuestions);
             return Json(new {response = true});
+        }
+
+        public JsonResult SaveQuizTry(string[] answerStrings,List<Question> questions,int quizId )
+        {
+            var answers = answerStrings.Select(x => x.Substring(x.IndexOf(' ')+1)).ToList();
+            int score = questions.Where((t, i) => t.Answer.Equals(answers[i])).Count();
+            UserManager<ApplicationUser> userManager = LMSRepo.GetUserManager();
+
+            QuizScore scrQuizScore = new QuizScore
+            {
+                Score = score,
+                QuizUser = userManager.FindById(User.Identity.GetUserId()),
+                QuizInformation = LMSRepo.GetQuizInformationById(quizId)
+            };
+            LMSRepo.AddNewQuizScore(scrQuizScore);
+            return Json(new {response = score});
         }
     }
 }

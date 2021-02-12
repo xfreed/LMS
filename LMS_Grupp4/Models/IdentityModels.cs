@@ -45,6 +45,7 @@ namespace LMS_Grupp4.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuizInformation> QuizInformations { get; set; }
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
+        public DbSet<QuizScore> QuizScores { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

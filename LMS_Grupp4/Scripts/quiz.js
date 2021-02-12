@@ -1,6 +1,9 @@
 ﻿var questionCounter = 1;
+var quizQuestions;
+var quizAnswer = [];
+
 function addNewQuestion() {
-    
+
     $("#questionList").append(`<div style="display: inline-block; margin: 10px">
         <label>question text</label><br/>
         <input type="text" id="question_name_${questionCounter}" placeholder="question name"/>
@@ -56,6 +59,66 @@ function saveNewQuiz() {
             } else {
                 alert("Some trouble...");
             }
+        }
+    });
+}
+
+function startQuiz() {
+    const quizId = $("#dropDown-quiz-get").val();
+    $.ajax({
+        type: "POST",
+        url: "/Quiz/Play",
+        data: {
+            id: quizId
+        },
+        success(response) {
+            if (response.played) {
+                $("#played-quiz").show();
+            } else {
+                questionCounter = 0;
+                quizQuestions = response;
+                nextQuestion();
+                $("#start-quiz").hide();
+                $("#played-quiz").hide();
+                $("#quiz").show();
+            }
+        }
+    });
+}
+
+function nextQuestion() {
+    if ($("input[name=question-answers]:checked").val() != null) {
+        quizAnswer.push($(`label[for='question-answers-${$("input[name=question-answers]:checked").val()}'`).text());
+    } 
+    $("#question-text").text(quizQuestions.response[questionCounter].QuestionName);
+    $("label[for='question-answers-A'").text(`A) ${quizQuestions.response[questionCounter].Answer}`);
+    $("label[for='question-answers-B'").text(`B) ${quizQuestions.response[questionCounter].Fake1}`);
+    $("label[for='question-answers-C'").text(`C) ${quizQuestions.response[questionCounter].Fake2}`);
+    $("label[for='question-answers-D'").text(`D) ${quizQuestions.response[questionCounter].Fake3}`);
+    if (questionCounter + 1 >= quizQuestions.response.length) {
+        $("#nextButton").text("Submit!");
+        $("#nextButton").attr("onclick", "quizSubmit()");
+        return;
+    }
+    questionCounter++;
+}
+
+function quizSubmit() {
+    quizAnswer.push($(`label[for='question-answers-${$("input[name=question-answers]:checked").val()}'`).text());
+    $.ajax({
+        type: "POST",
+        url: "/Quiz/SaveQuizTry",
+        data: {
+            answerStrings: quizAnswer,
+            questions: quizQuestions.response,
+            quizId: $("#dropDown-quiz-get").val()
+        },
+        success(response) {
+            $("#quiz").hide();
+            $("#scoreSpan").text(`${response.response} of ${questionCounter+1}`);
+            $("#finalScore").show();
+            questionCounter = 0;
+
         }
     });
 }

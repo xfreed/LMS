@@ -1,28 +1,47 @@
-﻿
+﻿@model LMS_Grupp4.Models.LMS_Models.QuizInformation
+
 @{
     ViewBag.Title = "Play";
 }
-
-    <h3>CSS Stands for...</h3>
+<div id="start-quiz">
+    <p>
+        Name of quiz
+        @Html.DropDownListFor(x => x.ID, ViewBag.QuizInformation as SelectList, new {@id="dropDown-quiz-get"});
+    </p>
+    <p>
+        <input type="submit" onclick="startQuiz()" value="Start!" />
+    </p>
+</div>
+<div id="quiz" style="display: none">
+    <h3 id="question-text">CSS Stands for...</h3>
 
     <div>
-        <input type="radio" name="question-1-answers" id="question-1-answers-A" value="A" />
-        <label for="question-1-answers-A">A) Computer Styled Sections </label>
+        <input type="radio" name="question-answers" id="question-answers-A" value="A" />
+        <label for="question-answers-A">A) Computer Styled Sections </label>
     </div>
 
     <div>
-        <input type="radio" name="question-1-answers" id="question-1-answers-B" value="B" />
-        <label for="question-1-answers-B">B) Cascading Style Sheets</label>
+        <input type="radio" name="question-answers" id="question-answers-B" value="B" />
+        <label for="question-answers-B">B) Cascading Style Sheets</label>
     </div>
 
     <div>
-        <input type="radio" name="question-1-answers" id="question-1-answers-C" value="C" />
-        <label for="question-1-answers-C">C) Crazy Solid Shapes</label>
+        <input type="radio" name="question-answers" id="question-answers-C" value="C" />
+        <label for="question-answers-C">C) Crazy Solid Shapes</label>
     </div>
 
     <div>
-        <input type="radio" name="question-1-answers" id="question-1-answers-D" value="D" />
-        <label for="question-1-answers-D">D) None of the above</label>
+        <input type="radio" name="question-answers" id="question-answers-D" value="D" />
+        <label for="question-answers-D">D) None of the above</label>
     </div>
 
-<button>Submit</button>
+    <button id="nextButton" onclick="nextQuestion()">Next</button>
+
+</div>
+
+<div id="finalScore" style="display: none;">
+    <h1>Your score is <span id="scoreSpan"></span></h1>
+</div>
+<div id="played-quiz" style="display: none;">
+    <h1>You already played this quiz!</h1>
+</div>
