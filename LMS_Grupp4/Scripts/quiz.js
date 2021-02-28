@@ -91,10 +91,15 @@ function nextQuestion() {
         quizAnswer.push($(`label[for='question-answers-${$("input[name=question-answers]:checked").val()}'`).text());
     } 
     $("#question-text").text(quizQuestions.response[questionCounter].QuestionName);
-    $("label[for='question-answers-A'").text(`A) ${quizQuestions.response[questionCounter].Answer}`);
-    $("label[for='question-answers-B'").text(`B) ${quizQuestions.response[questionCounter].Fake1}`);
-    $("label[for='question-answers-C'").text(`C) ${quizQuestions.response[questionCounter].Fake2}`);
-    $("label[for='question-answers-D'").text(`D) ${quizQuestions.response[questionCounter].Fake3}`);
+    const questions = [
+        quizQuestions.response[questionCounter].Answer, quizQuestions.response[questionCounter].Fake1,
+        quizQuestions.response[questionCounter].Fake2, quizQuestions.response[questionCounter].Fake3
+    ];
+    shuffle(questions);
+    $("label[for='question-answers-A'").text(`A) ${questions[0]}`);
+    $("label[for='question-answers-B'").text(`B) ${questions[1]}`);
+    $("label[for='question-answers-C'").text(`C) ${questions[2]}`);
+    $("label[for='question-answers-D'").text(`D) ${questions[3]}`);
     if (questionCounter + 1 >= quizQuestions.response.length) {
         $("#nextButton").text("Submit!");
         $("#nextButton").attr("onclick", "quizSubmit()");
@@ -102,7 +107,24 @@ function nextQuestion() {
     }
     questionCounter++;
 }
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
 function quizSubmit() {
     quizAnswer.push($(`label[for='question-answers-${$("input[name=question-answers]:checked").val()}'`).text());
     $.ajax({
